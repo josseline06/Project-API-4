@@ -8,52 +8,93 @@
 
   .factory('Chats', Chats)
 
-  .factory('AuthInterceptorRequet',AuthInterceptorRequet);
+  .factory('AuthInterceptorRequet',AuthInterceptorRequet)
+
+  .factory('DUAL',DUAL)
+
+  .factory('WORDS', WORDS);
 
   function Chats () {
-    // Might use a resource here that returns a JSON array
 
-    // Some fake testing data
-    var chats = [
-      {
-        id: 0,
-        name: 'Ben Sparrow',
-        lastText: 'You on your way?',
-        face: 'https://pbs.twimg.com/profile_images/514549811765211136/9SgAuHeY.png'
-      }, {
-        id: 1,
-        name: 'Max Lynx',
-        lastText: 'Hey, it\'s me',
-        face: 'https://avatars3.githubusercontent.com/u/11214?v=3&s=460'
-      },{
-        id: 2,
-        name: 'Adam Bradleyson',
-        lastText: 'I should buy a boat',
-        face: 'https://pbs.twimg.com/profile_images/479090794058379264/84TKj_qa.jpeg'
-      }, {
-        id: 3,
-        name: 'Perry Governor',
-        lastText: 'Look at my mukluks!',
-        face: 'https://pbs.twimg.com/profile_images/598205061232103424/3j5HUXMY.png'
-      }, {
-        id: 4,
-        name: 'Mike Harrington',
-        lastText: 'This is wicked good ice cream.',
-        face: 'https://pbs.twimg.com/profile_images/578237281384841216/R3ae1n61.png'
-      }
-    ];
+  }
+
+  function DUAL($http, HOST) {
+
+    var tweets = [];
+
+    var page = 1;
 
     return {
+      init: function() {
+        return $http.get(HOST + '/dual/' + '?page=' + page).then(function(data) {
+          tweets = data.data;
+        }, function(data) {
+          console.log('Something went wrong ' + data.status);
+        });
+      },
+      loadMore: function() {
+        page++;
+
+        return $http.get(HOST + '?page=' + page).then(function(data) {
+          tweets = tweets.concat(data.data);
+        }, function(data) {
+          page--;
+          console.log('Something went wrong ' + data.status);
+        });
+
+      },
       all: function() {
-        return chats;
+        return tweets;
       },
-      remove: function(chat) {
-        chats.splice(chats.indexOf(chat), 1);
+      remove: function(tweet) {
+        tweets.splice(tweets.indexOf(tweet), 1);
       },
-      get: function(chatId) {
-        for (var i = 0; i < chats.length; i++) {
-          if (chats[i].id === parseInt(chatId)) {
-            return chats[i];
+      get: function(tweetId) {
+        for (var i = 0; i < tweets.length; i++) {
+          if (tweets[i].id === parseInt(tweetId)) {
+            return tweets[i];
+          }
+        }
+        return null;
+      }
+    };
+  }
+
+  function WORDS($http, HOST) {
+
+    var words = [];
+
+    var page = 1;
+
+    return {
+      init: function() {
+        return $http.get(HOST + '/words/' + '?page=' + page).then(function(data) {
+          words = data.data;
+        }, function(data) {
+          console.log('Something went wrong ' + data.status);
+        });
+      },
+      loadMore: function() {
+        page++;
+
+        return $http.get(HOST + '?page=' + page).then(function(data) {
+          words = words.concat(data.data);
+        }, function(data) {
+          page--;
+          console.log('Something went wrong ' + data.status);
+        });
+
+      },
+      all: function() {
+        return words;
+      },
+      remove: function(word) {
+        words.splice(words.indexOf(word), 1);
+      },
+      get: function(wordId) {
+        for (var i = 0; i < words.length; i++) {
+          if (words[i].id === parseInt(wordId)) {
+            return words[i];
           }
         }
         return null;

@@ -8,6 +8,8 @@
 
   .controller('DashCtrl', DashCtrl)
 
+  .controller('WordsCtrl', WordsCtrl)
+
   .controller('ChatsCtrl', ChatsCtrl)
 
   .controller('ChatDetailCtrl', ChatDetailCtrl)
@@ -16,7 +18,35 @@
 
   .controller('LoginCtrl', LoginCtrl)
 
-  function DashCtrl ($scope){
+  function DashCtrl ($scope, DUAL){
+
+    $scope.tweets = DUAL.all();
+
+    $scope.remove = function(tweet) {
+      DUAL.remove(tweet);
+    };
+
+    $scope.loadMore = function() {
+      DUAL.loadMore().then(function() {
+        $scope.tweets = DUAL.all();
+      }, function() {});
+    };
+
+  }
+
+  function WordsCtrl ($scope, WORDS){
+
+    $scope.words = WORDS.all();
+
+    $scope.remove = function(word) {
+      WORDS.remove(word);
+    };
+
+    $scope.loadMore = function() {
+      WORDS.loadMore().then(function() {
+        $scope.words = WORDS.all();
+      }, function() {});
+    };
 
   }
 
