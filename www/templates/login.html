@@ -1,0 +1,25 @@
+<ion-view view-title="Login" ng-controller='LoginCtrl'>
+  <ion-content>
+    <form name="loginForm" ng-submit="login()">
+        <div class="list list-inset">
+
+            <label class="item item-input">
+                <input type="text" name="username" placeholder="Username" ng-model="user.username" equired>
+            </label>
+            <label class="item item-input">
+                <input type="password" name="password" placeholder="Password" ng-model="user.password" required>
+            </label>
+
+        </div>
+
+        <div class="padding">
+            <input type="submit" ng-disabled="!loginForm.$valid" class="button icon ion-log-in button-block button-positive">
+            </input>
+            <button class="button button-block button-positive button-outline" ng-click="goToRegister()">No posee una cuenta?
+            </button>
+
+        </div>
+    </form>
+
+  </ion-content>
+</ion-view>

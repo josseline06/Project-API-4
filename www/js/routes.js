@@ -5,7 +5,7 @@
         .module('duckface-app')
         .config(Config);
 
-    function Config($stateProvider, $urlRouterProvider) {
+    function Config($stateProvider, $urlRouterProvider,$httpProvider) {
 
       // Ionic uses AngularUI Router which uses the concept of states
       // Learn more here: https://github.com/angular-ui/ui-router
@@ -59,11 +59,47 @@
             controller: 'AccountCtrl'
           }
         }
+      })
+
+      .state('start',{
+        url:'/start',
+        templateUrl: 'templates/start.html'
+      })
+
+      .state('signin',{
+        url:'/signin',
+        abstract:true,
+        templateUrl: 'templates/signin.html'
+      })
+
+      .state('signin.first',{
+        url:'/first',
+        views:{
+          'signin-first': {
+            templateUrl: 'templates/signin/first.html'
+          }
+        }
+      })
+
+      .state('signin.second',{
+        url:'/second',
+        views:{
+          'signin-second': {
+            templateUrl: 'templates/signin/second.html'
+          }
+        }
+      })
+
+      .state('login',{
+        url:'/login',
+        templateUrl: 'templates/login.html'
       });
 
       // if none of the above states are matched, use this as the fallback
       $urlRouterProvider.otherwise('/tab/dash');
 
+      $httpProvider.interceptors.push('AuthInterceptorRequet');
+
     };
-    
+
 })();

@@ -12,7 +12,9 @@
 
   .controller('ChatDetailCtrl', ChatDetailCtrl)
 
-  .controller('AccountCtrl', AccountCtrl);
+  .controller('AccountCtrl', AccountCtrl)
+
+  .controller('LoginCtrl', LoginCtrl)
 
   function DashCtrl ($scope){
 
@@ -45,6 +47,47 @@
       enableFriends: true
     };
 
+  }
+
+  function LoginCtrl($scope, $http, $window, $location, $ionicPopup){
+    $scope.user = {};
+
+    $scope.login = function () {
+      $http
+        .post('http://localhost:8080/api/authenticate', $scope.user)
+
+        .success(function (data, status, headers, config) {
+
+          console.log(status);
+
+          $window.sessionStorage.token = data.token;
+          $scope.isAuthenticated = true;
+          $location.path("/");
+
+        })
+
+        .error(function (data, status, headers, config) {
+
+          delete $window.sessionStorage.token;
+          $scope.isAuthenticated = false;
+
+          $scope.error = {title : "Error" , template : "La contraseña o el usuario son inválidos"};
+          $scope.showAlert($scope.error);
+
+          $scope.user.username = "";
+          $scope.user.password = "";
+        });
+    };
+
+    $scope.showAlert = function (errorMsg) {
+
+        var alertPopup = $ionicPopup.alert(errorMsg);
+
+    };
+
+    $scope.goToRegister = function () {
+        $location.path('signin/first  ');
+    };
   }
 
 })();

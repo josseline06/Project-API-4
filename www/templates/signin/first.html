@@ -1,0 +1,22 @@
+<ion-view view-title="signin-first">
+
+    <form novalidate="novalidate" name="registerFormFirst">
+
+        <div class="list list-inset">
+            <label class="item item-input">
+                <input type="text" placeholder="Username" name="username" ng-model="registration.username" required>
+            </label>
+            <label class="item item-input">
+                <input type="password" placeholder="Password" name="password" ng-model="registration.password"required>
+            </label>
+        </div>
+
+        <div class="padding">
+            <input href="#/signin/second" type="submit" ng-disabled="!registerFormFirst.$valid" class="button icon ion-log-in button-block button-positive">
+                Continuar
+            </input>
+        </div>
+
+    </form>
+
+</ion-view>
