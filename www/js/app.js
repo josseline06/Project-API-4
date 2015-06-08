@@ -6,6 +6,7 @@
     'controllers',
     'services',
     'ionic-material',
+    'ngCordova'
   ])
 
   .constant('HOST', 'http://localhost:8080/api')

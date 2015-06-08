@@ -4,9 +4,9 @@
     <ion-item class="list card" ng-repeat="tweet in tweets">
       <div class="item item-divider">{{tweet.content}}</div>
       <div class="item item-body">
-        <div>
+        <!--<div>
          {{tweet.user_id}}
-        </div>
+        </div>-->
         <div>
           {{tweet.date | date:smallDate}} 
         </div>
@@ -17,6 +17,11 @@
       Load More...
     </button>-->
   </ion-content>
+  <ion-footer-bar  class="bar-clear">
+    <div class="buttons ion-plus" ng-click="doSomething()">
+      <button class="button">Right Button</button>
+    </div>
+  </ion-footer-bar>
 
 </ion-view>
 
