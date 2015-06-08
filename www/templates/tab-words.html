@@ -1,0 +1,15 @@
+<ion-view view-title="Palabras">
+  <ion-content>
+  <ion-list>
+    <ion-item ng-repeat="word in words">
+    <h2>PALABRA: {{word.text}}</h2>
+    <p>SENTIMIENTO: {{word.feeling}}</p>
+    <p>TIPO: {{word.word_type}}</p>
+    </ion-item>
+  </ion-list>
+    <!--<button class="button button-block button-positive" ng-click="loadMore()">
+      Load More...
+    </button>-->
+  </ion-content>
+</ion-view>
+

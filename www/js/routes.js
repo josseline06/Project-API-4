@@ -27,7 +27,27 @@
         views: {
           'tab-dash': {
             templateUrl: 'templates/tab-dash.html',
-            controller: 'DashCtrl'
+            controller: 'DashCtrl',
+            resolve: {
+              init : function(DUAL) {
+                return DUAL.init();
+              }
+            }
+          }
+        }
+      })
+
+      .state('tab.words', {
+        url: '/words',
+        views: {
+          'tab-words': {
+            templateUrl: 'templates/tab-words.html',
+            controller: 'WordsCtrl',
+            resolve: {
+              init : function(WORDS) {
+                return WORDS.init();
+              }
+            }
           }
         }
       })

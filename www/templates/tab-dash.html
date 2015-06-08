@@ -1,28 +1,22 @@
 <ion-view view-title="Duck's wall">
   <ion-content class="padding">
-    <div class="list card">
-      <div class="item item-divider">Recent Updates</div>
+    <ion-list>
+    <ion-item class="list card" ng-repeat="tweet in tweets">
+      <div class="item item-divider">{{tweet.content}}</div>
       <div class="item item-body">
         <div>
-          There is a fire in <b>sector 3</b>
+         {{tweet.user_id}}
         </div>
-      </div>
-    </div>
-    <div class="list card">
-      <div class="item item-divider">Health</div>
-      <div class="item item-body">
         <div>
-          You ate an apple today!
+          {{tweet.date | date:smallDate}} 
         </div>
       </div>
-    </div>
-    <div class="list card">
-      <div class="item item-divider">Upcoming</div>
-      <div class="item item-body">
-        <div>
-          You have <b>29</b> meetings on your calendar tomorrow.
-        </div>
-      </div>
-    </div>
+    </ion-item>
+    </ion-list>
+    <!--<button class="button button-block button-positive" ng-click="loadMore()">
+      Load More...
+    </button>-->
   </ion-content>
+
 </ion-view>
+
