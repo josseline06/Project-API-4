@@ -83,31 +83,13 @@
 
       .state('start',{
         url:'/start',
-        templateUrl: 'templates/start.html'
+        templateUrl: 'templates/start.html',
+        controller: 'StartCtrl'
       })
 
       .state('signin',{
         url:'/signin',
-        abstract:true,
         templateUrl: 'templates/signin.html'
-      })
-
-      .state('signin.first',{
-        url:'/first',
-        views:{
-          'signin-first': {
-            templateUrl: 'templates/signin/first.html'
-          }
-        }
-      })
-
-      .state('signin.second',{
-        url:'/second',
-        views:{
-          'signin-second': {
-            templateUrl: 'templates/signin/second.html'
-          }
-        }
       })
 
       .state('login',{

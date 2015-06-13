@@ -1,5 +1,10 @@
 <ion-view view-title="Login" ng-controller='LoginCtrl'>
+
   <ion-content>
+    <div class="bar bar-header bar-balanced">
+        <h1 class="title">Entrar</h1>
+    </div>
+    <br/><br/><br/>
     <form name="loginForm" ng-submit="login()">
         <div class="list list-inset">
 
@@ -13,7 +18,7 @@
         </div>
 
         <div class="padding">
-            <input type="submit" ng-disabled="!loginForm.$valid" class="button icon ion-log-in button-block button-positive">
+            <input type="submit" ng-disabled="!loginForm.$valid" class="button icon ion-log-in button-block button-positive" value="Entrar">
             </input>
             <button class="button button-block button-positive button-outline" ng-click="goToRegister()">No posee una cuenta?
             </button>

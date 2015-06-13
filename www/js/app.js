@@ -5,11 +5,10 @@
     'ionic',
     'controllers',
     'services',
-    'ionic-material',
     'ngCordova'
   ])
 
-  .constant('HOST', 'http://localhost:8080/api')
+  .constant('HOST', 'http://192.168.43.126:8080/api')
 
 
   .run(function($ionicPlatform) {

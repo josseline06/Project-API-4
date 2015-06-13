@@ -10,6 +10,8 @@
 
   .factory('AuthInterceptorRequet',AuthInterceptorRequet)
 
+  //.factory('Account',Account)
+
   .factory('DUAL',DUAL)
 
   .factory('WORDS', WORDS);
@@ -102,18 +104,24 @@
     };
   }
 
-  function AuthInterceptorRequet($rootScope, $q, $window){
+  function AuthInterceptorRequet($rootScope, $q, $window, $location){
     return {
       request: function (config) {
+
         config.headers = config.headers || {};
         if ($window.sessionStorage.token) {
           config.headers.Authorization = 'Bearer ' + $window.sessionStorage.token;
+
+        }else{
+          if($location.path() !== '/login' && $location.path() !== '/signin')
+            $location.path('/start');
         }
         return config;
       },
       responseError: function (rejection) {
+        console.log("fino");
         if (rejection.status === 401) {
-          // handle the case where the user is not authenticated
+          $location.path('/start');
         }
         return $q.reject(rejection);
       }

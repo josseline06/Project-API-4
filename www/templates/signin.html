@@ -1,8 +1,32 @@
-<ion-view view-title="Signin">
-  <ion-content>
-  
-  <ion-nav-view name="signin-first"></ion-nav-view>
-  <ion-nav-view name="signin-second"></ion-nav-view>
+<ion-view view-title="Signin" ng-controller="SigninCtrl">
 
+
+  <ion-content>
+	<div class="bar bar-header bar-balanced">
+		<h1 class="title">Registrar</h1>
+	</div>
+	<br/><br/><br/>
+    <form novalidate="novalidate" name="registerForm" ng-submit="signin()">
+
+        <div class="list list-inset">
+            <label class="item item-input">
+                <input type="text" placeholder="Username" name="username" ng-model="registration.username" required>
+            </label>
+            <label class="item item-input">
+                <input type="password" placeholder="Password" name="password" ng-model="registration.password"required>
+            </label>
+            <label class="item item-input">
+                <input type="text" placeholder="Nombre" name="name" ng-model="registration.name" required>
+            </label>
+            <label class="item item-input">
+                <input type="text" placeholder="Apellido" name="last_name" ng-model="registration.last_name"required>
+            </label>
+        </div>
+
+        <div class="padding">
+            <input href="#/" type="submit" ng-disabled="!registerForm.$valid" class="button icon ion-log-in button-block button-positive" value="Registrar">
+            </input>
+        </div>
+    </form>
   </ion-content>
 </ion-view>

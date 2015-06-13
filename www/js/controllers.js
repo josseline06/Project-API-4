@@ -18,6 +18,10 @@
 
   .controller('LoginCtrl', LoginCtrl)
 
+  .controller('StartCtrl',StartCtrl)
+
+  .controller('SigninCtrl',SigninCtrl);
+
   function DashCtrl ($scope, DUAL){
 
     $scope.tweets = DUAL.all();
@@ -71,11 +75,21 @@
       
   }
 
-  function AccountCtrl ($scope) {
+  function AccountCtrl ($scope, $http , $window) {
+    
+    $http
+      .get("http://192.168.43.126:8080/api"+"/users/"+$window.sessionStorage.username)
 
-    $scope.settings = {
-      enableFriends: true
-    };
+      .success(function (data, status, headers, config) {
+
+        $scope.user = data;
+        console.log(data);
+
+      })
+
+      .error(function (data, status, headers, config) {
+        console.log(data)
+      });
 
   }
 
@@ -84,13 +98,14 @@
 
     $scope.login = function () {
       $http
-        .post('http://localhost:8080/api/authenticate', $scope.user)
+        .post("http://192.168.43.126:8080/api"+"/authenticate", $scope.user)
 
         .success(function (data, status, headers, config) {
 
           console.log(status);
 
           $window.sessionStorage.token = data.token;
+          $window.sessionStorage.username = $scope.user.username;
           $scope.isAuthenticated = true;
           $location.path("/");
 
@@ -116,8 +131,48 @@
     };
 
     $scope.goToRegister = function () {
-        $location.path('signin/first  ');
+        $location.path('/signin');
     };
+  }
+
+  function StartCtrl($scope, $location){
+    $scope.a = {};
+  }
+
+  function SigninCtrl($scope, $http, $window, $location, $ionicPopup){
+    $scope.registration = {};
+
+
+    $scope.signin = function(){
+      $http
+        .post("http://192.168.43.126:8080/api"+"/users", $scope.registration)
+
+        .success(function (data, status, headers, config) {
+
+          console.log(status);
+          $scope.showAlert({title:"Bienvenido",template:data.message});
+          $location.path("/");
+
+        })
+
+        .error(function (data, status, headers, config) {
+
+          console.log(data)
+          $scope.error = {title : "Error" , template : "No se pudo crear el usuario"};
+          $scope.showAlert($scope.error);
+
+          $scope.user.username = "";
+          $scope.user.password = "";
+        });
+    };
+
+    $scope.showAlert = function (Msg) {
+
+        var alertPopup = $ionicPopup.alert(Msg);
+
+    };
+
+
   }
 
 })();

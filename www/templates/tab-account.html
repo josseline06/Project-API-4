@@ -1,14 +1,11 @@
-<ion-view view-title="Perfil de usuario">
+<ion-view view-title="Perfil de usuario" ng-controller="AccountCtrl">
   <ion-content>
-    <div class="card">
-      <div class="item item-divider">
-        I'm a Header in a Card!
-      </div>
-      <div class="item item-text-wrap">
-        This is a basic Card with some text.
-      </div>
-      <div class="item item-divider">
-        I'm a Footer in a Card!
+  
+    <div class="list card">
+      <div class="item item-avatar">
+        <img src="http://www.gravatar.com/avatar/{{user.hash}}" />
+        <h2>{{user.username}}</h2>
+        <p>{{user.name}} {{user.lastname}}</p>
       </div>
     </div>
 
